@@ -8,7 +8,7 @@ public class ConnectionFactory {
 	public Connection getConnection() throws Exception {
 		// parâmetros de conexão
 		String driver = "org.postgresql.Driver";
-		String host = "jdbc:postgresql://localhost:5432/bd_agendacontatos";
+		String host = "jdbc:postgresql://localhost:5432/bd_agendacontatos2";
 		String user = "postgres";
 		String password = "coti";
 		Class.forName(driver);

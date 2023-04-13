@@ -3,12 +3,15 @@ package br.com.cotiinformatica.entities;
 import java.util.List;
 
 public class Usuario {
-
 	private Integer idUsuario;
 	private String nome;
 	private String email;
 	private String senha;
 	private List<Contato> contatos;
+
+	public Usuario() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Usuario(Integer idUsuario, String nome, String email, String senha, List<Contato> contatos) {
 		super();
