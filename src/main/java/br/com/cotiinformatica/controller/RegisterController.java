@@ -25,23 +25,30 @@ public class RegisterController {
 	public ModelAndView cadastrarUsuario(HttpServletRequest request) {
 
 		ModelAndView modelAndView = new ModelAndView("register");
-
+		
 		try {
-
+			
 			Usuario usuario = new Usuario();
-
+			
 			usuario.setNome(request.getParameter("nome"));
 			usuario.setEmail(request.getParameter("email"));
 			usuario.setSenha(request.getParameter("senha"));
-
+			
 			UsuarioRepository usuarioRepository = new UsuarioRepository();
-			usuarioRepository.create(usuario);
-
-			modelAndView.addObject("mensagem_sucesso", "Parabéns, sua conta de usuário foi criada com sucesso!");
-		} catch (Exception e) {
+			
+			//verificar se já existe um usuário cadastrado com o email informado
+			if(usuarioRepository.findByEmail(usuario.getEmail()) != null) {
+				modelAndView.addObject("mensagem_erro", "O email informado já está cadastrado, tente outro.");
+			}
+			else {
+				usuarioRepository.create(usuario); //cadastrando usuário
+				modelAndView.addObject("mensagem_sucesso", "Parabéns, sua conta de usuário foi criada com sucesso!");
+			}	
+		}
+		catch(Exception e) {
 			modelAndView.addObject("mensagem_erro", "Falha ao criar conta: " + e.getMessage());
 		}
-
+		
 		return modelAndView;
 	}
 }
